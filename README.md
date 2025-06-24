@@ -284,7 +284,7 @@ Structure of a book data:
 
 }
 
-````
+```
 
 ### Get all books
 
