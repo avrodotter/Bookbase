@@ -269,21 +269,15 @@ curl -X POST http://localhost:5000/api/books \
 Structure of a book data:
 
 ```json
-
 {
-
-  "title": "The Alchemist",
-
-  "author": "Paulo Coelho",
-
-  "genre": "Fiction",
-
-  "isRead": true,
-
-  "rating": 4
-
+  "title": "The Alchemist",
+  "author": "Paulo Coelho",
+  "genre": "Fiction",
+  "isRead": true,
+  "rating": 4
 }
-
+```
+---
 
 ### Get all books
 
