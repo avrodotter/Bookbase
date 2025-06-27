@@ -1,27 +1,19 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config(); // loads DB URL from .env
+const dotenv = require('dotenv');
+const app = require('./app');
 
-const app = express();
-app.use(express.json()); // lets express read JSON from body
-app.use(cors());         // allows frontend to connect
+dotenv.config();
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected ✅'))
-  .catch(err => console.error('MongoDB error ❌', err));
-
-// Import routes
-const bookRoutes = require('./routes/bookRoutes');
-app.use('/api', bookRoutes); // all routes will be prefixed with /api
-
-// Start server
-const PORT = process.env.PORT || 5000;
-app.get('/', (req, res) => {
-  res.send('📚 Welcome to Book Tracker API!');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log('MongoDB connected ✅');
+      app.listen(5000, () => {
+        console.log('Server running on http://localhost:5000');
+      });
+    })
+    .catch((err) => {
+      console.error('MongoDB connection error ❌', err);
+    });
+}
